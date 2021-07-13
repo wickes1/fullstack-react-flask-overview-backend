@@ -50,17 +50,12 @@ class User(Base):
     password = Column(String(80))
     admin = Column(Boolean)
 
-    def __init__(self, name, password, admin):
-        self.name = name
-        self.password = password
-        self.admin = admin
-
     def serialize(self):
         return {"public_id": self.public_id, "name": self.name, "password": self.password, "admin": self.admin}
 
 
 if __name__ == '__main__':
     # test
-    from sqlalchemy.orm import scoped_session, sessionmaker, Query
+    from sqlalchemy.orm import scoped_session, sessionmaker
     db_session = scoped_session(sessionmaker(bind=engine))
     print(User.serialize(db_session.query(User).first()))
