@@ -10,6 +10,9 @@ def create_app(config=None):
     app.config.from_object('config.DevelopmentConfig')
     db.init_app(app)
 
+    from .auth import auth
+    app.register_blueprint(auth)
+
     from .api import api
     app.register_blueprint(api)
 

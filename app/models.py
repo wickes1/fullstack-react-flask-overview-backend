@@ -46,12 +46,12 @@ class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
     public_id = Column(String(50), unique=True)
-    name = Column(String(50))
+    username = Column(String(50))
     password = Column(String(80))
     admin = Column(Boolean)
 
     def serialize(self):
-        return {"public_id": self.public_id, "name": self.name, "password": self.password, "admin": self.admin}
+        return {"public_id": self.public_id, "username": self.username, "password": self.password, "admin": self.admin}
 
 
 if __name__ == '__main__':
