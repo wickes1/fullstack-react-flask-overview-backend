@@ -10,6 +10,10 @@ def create_app(config=None):
     app.config.from_object('config.DevelopmentConfig')
     db.init_app(app)
 
+    # from .models import Base
+    # Base.metadata.drop_all(bind=db.engine)
+    # Base.metadata.create_all(bind=db.engine)
+
     from .auth import auth
     app.register_blueprint(auth)
 

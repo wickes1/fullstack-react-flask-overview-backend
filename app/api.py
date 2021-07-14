@@ -1,10 +1,8 @@
-from flask import Blueprint, jsonify
-from flask_sqlalchemy import Pagination
+from flask import Blueprint, jsonify, request
 from sqlalchemy.sql import text
 from .models import *
 from .auth import token_required
 from app import db
-from sqlalchemy import select
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -27,20 +25,16 @@ def sql_query():
     return jsonify({'res': output})
 
 
-@api.route('/overview')
+@api.route('/overview', methods=["POST"])
 def building_overview():
-    print(type(db))
-    print(type(db.session))
-    print(type(Buildings))
-    print(type(User))
-    results = db.session.query.paginate()
-    # record_query = _record_queries.query.paginate(
-    #     page=1, error_out=False, max_per_page=15)
-
-    # result = dict(datas=record_query.items,
-    #               total=record_query.total,
-    #               current_page=record_query.page,
-    #               per_page=record_query.per_page)
+    results = db.session.query(Buildings).all()
+    data = request.get_json()
+    per_page = data['per_page']
+    page = data['page'] - 1
+    # my_list = [my_list[i:i + per_page] for i in range(0, len(my_list), per_page)][page]
+    paginated_results = [results[i:i + per_page]
+                         for i in range(0, len(results), per_page)][page]
+    return jsonify({"res": [Buildings.serialize(paginated_result) for paginated_result in paginated_results]})
 
 
 @api.route("/buildings", methods=["GET"])
