@@ -45,3 +45,8 @@ def create_app(config=None):
 
     # app.run(use_reloader=True, port=5000, threaded=True)
     return app
+
+
+if __name__ == "__main__":
+    app = create_app()
+    app.run(use_reloader=True, port=5000, threaded=True)
