@@ -4,7 +4,8 @@ from flask_cors import CORS
 from .models import *
 
 db = SQLAlchemy()
-
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'data.db')
 
 # def model_exists(model_class):
 #     engine = db.get_engine(bind=model_class.__bind_key__)
@@ -14,8 +15,9 @@ db = SQLAlchemy()
 def create_app(config=None):
     app = Flask(__name__, static_url_path="", static_folder="build")
     CORS(app)
-    app.config.from_object('config.ProductionConfig')
+    # app.config.from_object('config.ProductionConfig')
     # app.config.from_object('config.DevelopmentConfig')
+    app['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
     db.init_app(app)
 
     # Serve React App
