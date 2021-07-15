@@ -1,4 +1,3 @@
-*.db
 temp
 __pycache__
 venv
