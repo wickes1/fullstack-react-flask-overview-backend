@@ -25,16 +25,19 @@ def sql_query():
     return jsonify({'res': output})
 
 
-@api.route('/overview', methods=["POST"])
-def building_overview():
+@api.route('/building_overview', methods=["POST"])
+@token_required
+def building_overview(current_user):
     results = db.session.query(Buildings).all()
     data = request.get_json()
+    print(data)
     per_page = data['per_page']
     page = data['page'] - 1
+    page_size = len(results)
     # my_list = [my_list[i:i + per_page] for i in range(0, len(my_list), per_page)][page]
     paginated_results = [results[i:i + per_page]
-                         for i in range(0, len(results), per_page)][page]
-    return jsonify({"res": [Buildings.serialize(paginated_result) for paginated_result in paginated_results]})
+                         for i in range(0, page_size, per_page)][page]
+    return jsonify({"res": [Buildings.serialize(paginated_result) for paginated_result in paginated_results], "page_size": page_size})
 
 
 @api.route("/buildings", methods=["GET"])
