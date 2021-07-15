@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from .models import *
 
 db = SQLAlchemy()
@@ -7,6 +8,7 @@ db = SQLAlchemy()
 
 def create_app(config=None):
     app = Flask(__name__, static_url_path="", static_folder="build")
+    CORS(app)
     app.config.from_object('config.ProductionConfig')
     # app.config.from_object('config.DevelopmentConfig')
     db.init_app(app)
