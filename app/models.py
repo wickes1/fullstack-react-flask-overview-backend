@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, Table, Column, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
 
-engine = create_engine(os.getenv('DEV_DATABASE_URI'),
+engine = create_engine(os.getenv('DATABASE_URI'),
                        convert_unicode=True, echo=False)
 Base = declarative_base(engine)
 
