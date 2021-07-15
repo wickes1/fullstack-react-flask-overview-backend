@@ -3,7 +3,6 @@ click==8.0.1
 colorama==0.4.4
 Flask==2.0.1
 Flask-Cors==3.0.10
-flask-marshmallow==0.14.0
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.0
 gunicorn==20.1.0
@@ -11,10 +10,9 @@ importlib-metadata==4.6.1
 itsdangerous==2.0.1
 Jinja2==3.0.1
 MarkupSafe==2.0.1
-marshmallow==3.12.2
-marshmallow-sqlalchemy==0.26.1
 psycopg2==2.9.1
 pycodestyle==2.7.0
+PyMySQL==1.0.2
 python-dotenv==0.18.0
 six==1.16.0
 SQLAlchemy==1.4.20

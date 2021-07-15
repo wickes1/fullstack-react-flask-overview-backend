@@ -49,24 +49,24 @@ def get_all_buildings(current_user):
     return jsonify({"res": [Buildings.serialize(result) for result in results]})
 
 
-@api.route("/buildings_gfa", methods=["GET"])
+# @api.route("/buildings_gfa", methods=["GET"])
+# # @token_required
+# def get_all_buildings_gfa():
+#     # if not current_user.admin:
+#     #     return jsonify({"message": "Cannot perform that function!"})
+#     results = db.session.query(Buildings_gfa).limit(5).all()
+#     return jsonify({"res": [Buildings_gfa.serialize(result) for result in results]})
+
+
+# @api.route("/energy_star_rating", methods=["GET"])
 # @token_required
-def get_all_buildings_gfa():
-    # if not current_user.admin:
-    #     return jsonify({"message": "Cannot perform that function!"})
-    results = db.session.query(Buildings_gfa).limit(5).all()
-    return jsonify({"res": [Buildings_gfa.serialize(result) for result in results]})
+# def get_all_energy_star_rating(current_user):
+#     results = db.session.query(Energy_star_rating).limit(5).all()
+#     return jsonify({"res": [Energy_star_rating.serialize(result) for result in results]})
 
 
-@api.route("/energy_star_rating", methods=["GET"])
-@token_required
-def get_all_energy_star_rating(current_user):
-    results = db.session.query(Energy_star_rating).limit(5).all()
-    return jsonify({"res": [Energy_star_rating.serialize(result) for result in results]})
-
-
-@api.route("/metrics", methods=["GET"])
-@token_required
-def get_all_metrics(current_user):
-    results = db.session.query(Metrics).limit(5).all()
-    return jsonify({"res": [Metrics.serialize(result) for result in results]})
+# @api.route("/metrics", methods=["GET"])
+# @token_required
+# def get_all_metrics(current_user):
+#     results = db.session.query(Metrics).limit(5).all()
+#     return jsonify({"res": [Metrics.serialize(result) for result in results]})

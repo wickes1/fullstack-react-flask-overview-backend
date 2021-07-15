@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, jsonify, g, redirect, url_for
 from .models import *
-from app import db
 
 page = Blueprint('page', __name__)
 
