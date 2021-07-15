@@ -17,7 +17,7 @@ def create_app(config=None):
     CORS(app)
     # app.config.from_object('config.ProductionConfig')
     # app.config.from_object('config.DevelopmentConfig')
-    app['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+    app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
     db.init_app(app)
 
     # Serve React App
