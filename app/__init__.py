@@ -6,11 +6,16 @@ from .models import *
 db = SQLAlchemy()
 
 
+# def model_exists(model_class):
+#     engine = db.get_engine(bind=model_class.__bind_key__)
+#     return model_class.metadata.tables[model_class.__tablename__].exists(engine)
+
+
 def create_app(config=None):
     app = Flask(__name__, static_url_path="", static_folder="build")
     CORS(app)
-    # app.config.from_object('config.ProductionConfig')
-    app.config.from_object('config.DevelopmentConfig')
+    app.config.from_object('config.ProductionConfig')
+    # app.config.from_object('config.DevelopmentConfig')
     db.init_app(app)
 
     # Serve React App
@@ -21,6 +26,9 @@ def create_app(config=None):
             return send_from_directory(app.static_folder, path)
         else:
             return send_from_directory(app.static_folder, "index.html")
+
+    # if not model_exists(User):
+    #     User.__table__.create(db.session.bind)
 
     from .auth import auth
     app.register_blueprint(auth)

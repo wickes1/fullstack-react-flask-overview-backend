@@ -2,8 +2,9 @@ import os
 from sqlalchemy import create_engine, Table, Column, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
-
-engine = create_engine(os.getenv('DATABASE_URI'),
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'data.db')
+engine = create_engine(SQLALCHEMY_DATABASE_URI,
                        convert_unicode=True, echo=False)
 Base = declarative_base(engine)
 
