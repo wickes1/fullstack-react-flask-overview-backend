@@ -9,7 +9,6 @@ class Config(object):
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
-    pass
 
 
 class DevelopmentConfig(Config):
