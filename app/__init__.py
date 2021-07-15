@@ -7,8 +7,8 @@ db = SQLAlchemy()
 
 def create_app(config=None):
     app = Flask(__name__, static_url_path="", static_folder="build")
-    # app.config.from_object('config.ProductionConfig')
-    app.config.from_object('config.DevelopmentConfig')
+    app.config.from_object('config.ProductionConfig')
+    # app.config.from_object('config.DevelopmentConfig')
     db.init_app(app)
 
     from .auth import auth

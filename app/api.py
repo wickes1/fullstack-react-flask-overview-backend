@@ -12,12 +12,31 @@ def main_index():
     return 'API Page'
 
 
-@api.route('/sql_query')
+@api.route('/test_query', methods=['GET'])
+def test_query():
+    # 1.x
+    # LegacyCursorResult Classes compatiable query
+    sql_cmd = """
+    select *
+    from buildings
+    """
+    results = db.engine.execute(sql_cmd)
+    output = []
+    for result in results.all():
+        result_data = {}
+        result_data['type'] = result[0]
+        result_data['avg(eui)'] = result[1]
+        output.append(result_data)
+    return jsonify({"res": output})
+
+
+@api.route('/sql_query', methods=['GET'])
 def sql_query():
+    # 2.x
     s = text("SELECT type, avg(eui) AS `average_eui` FROM ( SELECT `t`.`OSEBuildingID` AS `id`, `t`.`PrimaryPropertyType` AS `type`, `t2`.`electricity` / `t1`.`gfa` AS `eui` FROM `buildings` t LEFT JOIN ( SELECT `OSEBuildingID` AS `id`, SUM(`PropertyUseTypeGFA`) AS `gfa` FROM `buildings_gfa` GROUP BY `OSEBuildingID` ) t1 ON `t`.`OSEBuildingID` = `t1`.`id` LEFT JOIN ( SELECT `OSEBuildingID` AS id, value AS `electricity` FROM metrics WHERE metric = 'Electricity' ) t2 ON `t`.`OSEBuildingID` = `t2`.`id` ) GROUP BY `type`")
     results = db.engine.execute(s)
     output = []
-    for result in results:
+    for result in results.all():
         result_data = {}
         result_data['type'] = result[0]
         result_data['avg(eui)'] = result[1]

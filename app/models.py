@@ -16,28 +16,30 @@ class Buildings(Base):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 #  Model disable for production environment
-# class Buildings_gfa(Base):
-#     __table__ = Table("buildings_gfa", Base.metadata,
-#                       autoload=True, autoload_with=engine)
-
-#     def serialize(self):
-#         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
-# class Energy_star_rating(Base):
-#     __table__ = Table("energy_star_rating", Base.metadata,
-#                       autoload=True, autoload_with=engine)
+class Buildings_gfa(Base):
+    __table__ = Table("buildings_gfa", Base.metadata,
+                      autoload=True, autoload_with=engine)
 
-#     def serialize(self):
-#         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def serialize(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
-# class Metrics(Base):
-#     __table__ = Table("metrics", Base.metadata,
-#                       autoload=True, autoload_with=engine)
+class Energy_star_rating(Base):
+    __table__ = Table("energy_star_rating", Base.metadata,
+                      autoload=True, autoload_with=engine)
 
-#     def serialize(self):
-#         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def serialize(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class Metrics(Base):
+    __table__ = Table("metrics", Base.metadata,
+                      autoload=True, autoload_with=engine)
+
+    def serialize(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 # User.__table__.create(db.session.bind)
 
@@ -47,7 +49,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     public_id = Column(String(50), unique=True)
     username = Column(String(50))
-    password = Column(String(80))
+    password = Column(String)
     admin = Column(Boolean)
 
     def serialize(self):
