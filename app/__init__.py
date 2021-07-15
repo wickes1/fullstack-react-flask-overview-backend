@@ -7,9 +7,10 @@ db = SQLAlchemy()
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'data.db')
 
-# def model_exists(model_class):
-#     engine = db.get_engine(bind=model_class.__bind_key__)
-#     return model_class.metadata.tables[model_class.__tablename__].exists(engine)
+
+def model_exists(model_class):
+    engine = db.get_engine(bind=model_class.__bind_key__)
+    return model_class.metadata.tables[model_class.__tablename__].exists(engine)
 
 
 def create_app(config=None):

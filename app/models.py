@@ -42,8 +42,6 @@ class Metrics(Base):
     def serialize(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
-# User.__table__.create(db.session.bind)
-
 
 class User(Base):
     __tablename__ = "user"
@@ -61,4 +59,5 @@ if __name__ == '__main__':
     # test
     from sqlalchemy.orm import scoped_session, sessionmaker
     db_session = scoped_session(sessionmaker(bind=engine))
+    User.__table__.create(db_session.bind)
     print(User.serialize(db_session.query(User).first()))
